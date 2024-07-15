@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ums-api
+  labels:
+    app-ums: 'true'
+spec:
+  replicas: {{.Values.replicas}}
+  selector:
+    matchLabels:
+      app-ums: 'true'
+  template:
+    metadata:
+      labels:
+        app-ums: 'true'
+    spec:
+      nodeSelector:
+        app-ums: 'true'
+      containers:
+      - name: ums-api
+        image: {{.Values.image}}
+        imagePullPolicy: {{.Values.imagePullPolicy}}
+        env:
+        - name: env
+          value: {{.Values.env}}
+        ports:
+        - containerPort: 8081
+      tolerations:
+      - key: "internal-applications" 
+        operator: Equal
+        value: "true"
+        effect: NoSchedule

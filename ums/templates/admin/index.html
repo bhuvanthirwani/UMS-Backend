@@ -1,0 +1,49 @@
+{% extends 'admin/master.html' %}
+{% block body %}
+{{ super() }}
+<div class="row-fluid">
+
+    <div class="w-100">
+        {% if current_user.is_authenticated %}
+        <h1>Welcome to Super admin.</h1>
+        <p class="lead">
+            You are successfully logged in.
+        </p>
+        <p>
+            All you changes will get reflected in production application, please take caution while making changes here.
+        </p>
+        {% else %}
+        <div class="d-flex align-items-center justify-content-center">
+            <style>
+                input {
+                    padding: 10px;
+                    height: 40px;
+                    width: 100%;
+                    border-radius: 4px;
+                    border: none;
+                    outline: solid gray 1px;
+                }
+            </style>
+            <form method="POST" action="" class="card my-4 p-4 py-5 bg-white" style="min-width: 450px;">
+                {{ form.hidden_tag() if form.hidden_tag }}
+                {% for f in form if f.type != 'CSRFTokenField' %}
+                <div class="form-group">
+                    {{ f.label }}<br>
+                    {{ f }}
+                    {% if f.errors %}
+                    <div class="my-2">
+                        {% for e in f.errors %}
+                        <p class="alert alert-danger">{{ e }}</p>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                </div>
+                {% endfor %}
+                <button class="btn btn-primary rounded-3 mt-3" type="submit">Submit</button>
+            </form>
+        </div>
+        {{ link | safe }}
+        {% endif %}
+    </div>
+</div>
+{% endblock body %}

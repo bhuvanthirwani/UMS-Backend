@@ -1,0 +1,133 @@
+{% import 'admin/layout.html' as layout with context -%}
+{% extends 'admin/base.html' %}
+
+{% block head_tail %}
+{{ super() }}
+<link href="{{ url_for('static', filename='layout.css') }}" rel="stylesheet">
+{% endblock %}
+
+
+
+{% block page_body %}
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2 vh-100 bg-dark px-1 text-white d-flex flex-column flex-shrink-0" role="navigation">
+      <div class="p-3">
+        <strong>Ums</strong>
+      </div>
+      <ul class="nav nav-pills flex-column mb-auto text-white">
+        {{ layout.menu() }}
+        {{ layout.menu_links() }}
+      </ul>
+
+      {% block access_control %}
+      {% if current_user.is_authenticated %}
+      <div class="dropdown show">
+        <button class="btn bg-white btn-block w-100 rounded my-2" href="#!" style="text-align: left;" role="button" id="dropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+          <i class="icon-user"></i> {{ current_user.login | capitalize }} <span class="caret"></span>
+        </button>
+
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+          <a class="btn" href="{{ url_for('/admin.logout_view') }}">Log out</a>
+        </div>
+      </div>
+      {% endif %}
+      {% endblock %}
+    </div>
+
+    <div class="col-md-10">
+      <div id="content" class="row">
+        {% block brand %}
+        <h4 id="brand" class="w-100">{{ admin_view.name | capitalize }}</h4>
+        {% endblock %}
+        {{ layout.messages() }}
+
+        {% set render_ctx = h.resolve_ctx() %}
+
+        {% block body %}
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  <style>
+    body {
+      background: #EEE;
+    }
+
+    #brand {
+      width: 100%;
+    }
+
+    #content {
+      background: white;
+      border: 1px solid #CCC;
+      padding: 15px 20px 30px 35px;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 100vh;
+      align-items: start;
+    }
+
+    #content .row {
+      margin-left: 0px;
+    }
+
+    .search-form {
+      margin: 0 5px;
+    }
+
+    .search-form form {
+      margin: 0;
+    }
+
+    .btn-menu {
+      margin: 4px 5px 0 0;
+      float: right;
+    }
+
+    .btn-menu a,
+    .btn-menu input {
+      padding: 7px 16px !important;
+      border-radius: 1px !important;
+      border-color: #ccc;
+    }
+
+    .nav-pills .active > a {
+      background-color: white;
+      color: black;
+    }
+
+    .nav-pills li > a {
+      border-radius: 0px !important;
+      margin-bottom: 3px;
+      color: white;
+      transition: 300ms ease-in-out;
+    }
+
+    .nav-pills li > a:hover {
+      border-radius: 0px !important;
+      background-color: #fff;
+      margin-bottom: 3px;
+      color: black;
+    }
+
+    .select2-container .select2-choice {
+      border-radius: 0;
+    }
+
+    a.dropdown-toggle b.caret {
+      margin-left: 5px;
+    }
+
+    .submit-row{
+      display: flex;
+      gap: 3px;
+      align-items: start;
+      max-width: 100%;
+      padding: 0px;
+    }
+  </style>
+</div>
+{% endblock %}

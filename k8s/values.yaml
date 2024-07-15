@@ -1,0 +1,16 @@
+env:
+  name: env
+  value: prod
+
+authresources:
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 0.5Gi
+
+livenessProbe:
+  delaysec: 30
+  periodsec: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3

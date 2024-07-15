@@ -1,0 +1,17 @@
+# Env & utils
+*.venv
+*.trunk
+*.mypy_cache
+server.log
+
+### Python template
+
+.idea/
+.vscode/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so

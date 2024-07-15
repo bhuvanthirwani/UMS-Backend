@@ -1,0 +1,8 @@
+apiVersion: v1
+description: Ums Application
+name: ums
+version: "0.1"
+home: http://ums.domain.com
+maintainers:
+- name: Bhuvan Thirwani
+  email: bhuvanthirwani@gmail.com

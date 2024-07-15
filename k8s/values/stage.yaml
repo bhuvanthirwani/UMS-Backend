@@ -1,0 +1,11 @@
+image: organization_account_alias.dkr.ecr.ap-south-1.amazonaws.com/ums-stage:latest
+env: staging
+imagePullPolicy: Always
+replicas: 1
+
+livenessProbe:
+  delaysec: 30
+  periodsec: 10
+  timeoutSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3

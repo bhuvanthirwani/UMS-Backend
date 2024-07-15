@@ -1,0 +1,1 @@
+CREATE_APP_USER_HEADER = {'Content-Type': 'application/json'}
